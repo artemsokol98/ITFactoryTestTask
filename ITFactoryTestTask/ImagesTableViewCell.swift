@@ -90,6 +90,17 @@ extension ImagesTableViewCell: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? OneImageCollectionViewCell {
+            cell.showBorder()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? OneImageCollectionViewCell {
+            cell.hideBorder()
+        }
+    }
     
 }
 

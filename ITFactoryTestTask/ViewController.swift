@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ImagesTableViewCell.self, forCellReuseIdentifier: ImagesTableViewCell.identifier)
+        //tableView.separatorColor = self.tableView.backgroundColor
         return tableView
     }()
 
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewModel = MainViewModel()
         viewModel.fetchDataFromFile()
-        // Do any additional setup after loading the view.
+        tableView.separatorColor = self.tableView.backgroundColor
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,9 +55,17 @@ extension ViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.dataFromJson.sections.count
     }
-    
+    /*
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        viewModel.dataFromJson.sections[section].header
+        let title = viewModel.dataFromJson.sections[section].header
+        title.font = .systemFont(ofSize: 20, weight: .bold)
+        return title
+    }
+    */
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderLabel.identifier) as? SectionHeaderLabel else { return UIView() }//.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderLabel.identifier) as? SectionHeaderLabel else { return UIView() }
+        header.configureHeader(text: viewModel.dataFromJson.sections[section].header)
+        return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -23,6 +23,7 @@
 		71E4CB7F297D793400060E32 /* ImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4CB7E297D793400060E32 /* ImagesTableViewCell.swift */; };
 		71E4CB81297D796000060E32 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4CB80297D796000060E32 /* NetworkManager.swift */; };
 		71E4CB83297D7CC200060E32 /* OneImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4CB82297D7CC200060E32 /* OneImageCollectionViewCell.swift */; };
+		71E4CB86297DE9EC00060E32 /* SectionHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E4CB85297DE9EC00060E32 /* SectionHeaderLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		71E4CB7E297D793400060E32 /* ImagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCell.swift; sourceTree = "<group>"; };
 		71E4CB80297D796000060E32 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		71E4CB82297D7CC200060E32 /* OneImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		71E4CB85297DE9EC00060E32 /* SectionHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				71E4CB84297D9A2900060E32 /* Support */,
 				71E4CB78297D72B700060E32 /* jsonviewer.json */,
 				71E4CB49297D724300060E32 /* ViewController.swift */,
+				71E4CB85297DE9EC00060E32 /* SectionHeaderLabel.swift */,
 				71E4CB7E297D793400060E32 /* ImagesTableViewCell.swift */,
 				71E4CB82297D7CC200060E32 /* OneImageCollectionViewCell.swift */,
 				71E4CB7C297D74B300060E32 /* MainViewModel.swift */,
@@ -293,6 +296,7 @@
 				71E4CB46297D724300060E32 /* AppDelegate.swift in Sources */,
 				71E4CB7F297D793400060E32 /* ImagesTableViewCell.swift in Sources */,
 				71E4CB50297D724300060E32 /* ITFactoryTestTask.xcdatamodeld in Sources */,
+				71E4CB86297DE9EC00060E32 /* SectionHeaderLabel.swift in Sources */,
 				71E4CB81297D796000060E32 /* NetworkManager.swift in Sources */,
 				71E4CB7B297D732300060E32 /* MainModel.swift in Sources */,
 				71E4CB48297D724300060E32 /* SceneDelegate.swift in Sources */,
