@@ -15,7 +15,7 @@ class SectionHeaderLabel: UITableViewHeaderFooterView {
         let label = UILabel()
         label.textColor = .black
         label.text = "Default text"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: Constants.fontSizeForSection, weight: .bold)
         return label
     }()
     
@@ -25,6 +25,7 @@ class SectionHeaderLabel: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        backgroundColor = Constants.appBackgroundColor
     }
     
     required init?(coder: NSCoder) {
@@ -34,25 +35,15 @@ class SectionHeaderLabel: UITableViewHeaderFooterView {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.addSubview(label)
-        contentView.backgroundColor = .red
         label.translatesAutoresizingMaskIntoConstraints = false
         
         let labelConstraints = [
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: contentView.bounds.width * 0.1),
-            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -contentView.bounds.width * 0.1),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -contentView.bounds.height * 0.1),
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: contentView.bounds.height * 0.1)
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.spaceFromEdge),
+            label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.spaceFromEdge),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor)
         ]
         
         NSLayoutConstraint.activate(labelConstraints)
     }
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

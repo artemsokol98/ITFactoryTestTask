@@ -13,7 +13,7 @@ class NetworkManager {
     let sessionConfig = URLSessionConfiguration.default
     
     func downloadData<T: Decodable>(urlString: String, expectingType: T.Type, completion: @escaping (Result<Any,Error>) -> Void) {
-        sessionConfig.timeoutIntervalForRequest = 10
+        sessionConfig.timeoutIntervalForRequest = Constants.timeWaitingForLoading
         let session = URLSession(configuration: sessionConfig)
         guard let url = URL(string: urlString) else { return }
         

@@ -1,5 +1,5 @@
 //
-//  MainModel.swift
+//  JSONModel.swift
 //  ITFactoryTestTask
 //
 //  Created by Артем Соколовский on 22.01.2023.
@@ -8,26 +8,26 @@
 import Foundation
 
 // MARK: - MainModel
-struct MainModel: Codable {
+struct JSONModel: Decodable {
     let sections: [Section]
 }
 
 // MARK: - Section
-struct Section: Codable {
+struct Section: Decodable {
     let id, header: String
     let itemsTotal, itemsToShow: Int
     let items: [Item]
 }
 
 // MARK: - Item
-struct Item: Codable {
+struct Item: Decodable {
     let id: String
     let image: Image
     let title: String
 }
 
 // MARK: - Image
-struct Image: Codable {
+struct Image: Decodable {
     let the1X, the2X, the3X: String
     let aspectRatio: Int?
     let loopAnimation: Bool?

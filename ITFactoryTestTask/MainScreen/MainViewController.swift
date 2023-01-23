@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  ITFactoryTestTask
 //
 //  Created by Артем Соколовский on 22.01.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     var viewModel: MainViewModelProtocol!
     
@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ImagesTableViewCell.self, forCellReuseIdentifier: ImagesTableViewCell.identifier)
-        //tableView.separatorColor = self.tableView.backgroundColor
+        tableView.register(SectionHeaderLabel.self, forHeaderFooterViewReuseIdentifier: SectionHeaderLabel.identifier)
         return tableView
     }()
 
@@ -24,48 +24,40 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         viewModel = MainViewModel()
         viewModel.fetchDataFromFile()
+        view.backgroundColor = Constants.appBackgroundColor
+        tableView.backgroundColor = Constants.appBackgroundColor
         tableView.separatorColor = self.tableView.backgroundColor
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.addSubview(tableView)
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         let tableViewConstraints = [
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
         NSLayoutConstraint.activate(tableViewConstraints)
-        
     }
+}
 
+extension MainViewController: UITableViewDelegate {
 
 }
 
-extension ViewController: UITableViewDelegate {
-    
-}
-
-extension ViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.dataFromJson.sections.count
     }
-    /*
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let title = viewModel.dataFromJson.sections[section].header
-        title.font = .systemFont(ofSize: 20, weight: .bold)
-        return title
-    }
-    */
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderLabel.identifier) as? SectionHeaderLabel else { return UIView() }//.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderLabel.identifier) as? SectionHeaderLabel else { return UIView() }
-        header.configureHeader(text: viewModel.dataFromJson.sections[section].header)
-        return header
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderLabel.identifier) as? SectionHeaderLabel else { return UIView() }
+        view.configureHeader(text: viewModel.dataFromJson.sections[section].header)
+        return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,8 +71,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        300.0
+        view.bounds.width * 0.8
     }
-    
 }
 

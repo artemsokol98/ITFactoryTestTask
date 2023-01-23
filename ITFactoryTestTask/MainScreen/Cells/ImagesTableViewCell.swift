@@ -9,7 +9,7 @@ import UIKit
 
 class ImagesTableViewCell: UITableViewCell {
     
-    private let spacing: CGFloat = 10.0
+    private let spacing: CGFloat = Constants.spaceFromEdge
     
     static let identifier = "ImagesTableViewCell"
     
@@ -27,6 +27,7 @@ class ImagesTableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = Constants.appBackgroundColor
         collectionView.register(OneImageCollectionViewCell.self, forCellWithReuseIdentifier: OneImageCollectionViewCell.identifier)
         return collectionView
     }()
@@ -42,7 +43,6 @@ class ImagesTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.addSubview(collectionView)
-        //collectionView.frame = contentView.bounds
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -56,19 +56,7 @@ class ImagesTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(collectionViewConstraints)
         
     }
-    
-    /*
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-     */
     func configureCell(section: Section) {
         viewModel = section.items
     }
@@ -92,23 +80,24 @@ extension ImagesTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? OneImageCollectionViewCell {
-            cell.showBorder()
+            if Constants.numberOfSelectedItems < Constants.maxNumberSelectedItems && !cell.itemSelected {
+                cell.showBorder()
+                cell.itemSelected = true
+                Constants.numberOfSelectedItems += 1
+            } else {
+                cell.hideBorder()
+                cell.itemSelected = false
+                Constants.numberOfSelectedItems -= 1
+            }
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? OneImageCollectionViewCell {
-            cell.hideBorder()
-        }
-    }
-    
 }
 
 extension ImagesTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfItemsPerRow:CGFloat = 2
-        let spacingBetweenCells:CGFloat = 10.0
-        let totalSpacing = self.spacing * 2 + ((numberOfItemsPerRow - 1) * spacingBetweenCells) // Amount of total spacing in a row
+        let numberOfItemsPerRow: CGFloat = Constants.numberOfItemsInOneWidthScreen
+        let spacingBetweenCells: CGFloat = spacing
+        let totalSpacing = self.spacing * 2 + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
         let width = floor((collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow)
         return CGSize(width: width, height: width * 1.5)
     }
